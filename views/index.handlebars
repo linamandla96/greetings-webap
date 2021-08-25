@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="greetings-webapp/">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="row1">
+        <div class="greeting">
+            <h1>GREETING APP</h1>
+
+
+              
+
+                <label class="">
+                    <span class="errors"></span>
+                </label>
+
+                <div class="counters">
+                    <h3>COUNTER</h3>
+                    <label class="">
+                        <span class="counter" name="count">{{count}}</span>
+                    </label>
+                </div>
+                <form action="/greeting" method="POST">
+                    <label for="">Name</label>
+                    <input type="text" name="names" class="nameEntered" value="{{names}}"
+                        placeholder="enter name"><br>
+                    <br>
+                   
+                        <div class="lazy">
+                            <label class="english">
+                                <input type="radio" name="languages" class="languageSelect" value="English">
+                                <span class="label-body">ENGLISH</span>
+                            </label>
+
+                            <label class="xhosa">
+                                <input type="radio" name="languages" class="languageSelect" value="Isixhosa">
+                                <span class="label-body">ISIXHOSA</span>
+                            </label>
+
+                            <label class="sotho">
+                                <input type="radio" name="languages" class="languageSelect" value="Sesotho">
+                                <span class="label-body">SESOTHO</span>
+                            </label>
+
+                        </div><br>
+                   
+
+                    <button class="button-primary greetmebtn" type="submit" name="button">Greet me</button>
+                    <button class="resetbtn" type="submit" name="button">Reset</button><br>
+                    <br>
+                </form>
+                <div class="">
+                    <span class="mes">{{message}}</span>
+                </div><br>
+                <br>
+
+            
+
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

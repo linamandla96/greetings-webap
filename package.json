@@ -1,0 +1,34 @@
+{
+  "name": "greetings-webapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "json": "^11.0.0"
+  },
+  "devDependencies": {
+    "express-handlebars": "^5.3.3",
+    "mocha": "^9.1.0",
+    "nodemon": "^2.0.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linamandla96/greetings-webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/linamandla96/greetings-webapp/issues"
+  },
+  "homepage": "https://github.com/linamandla96/greetings-webapp#readme",
+  "description": ""
+}

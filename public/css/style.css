@@ -1,0 +1,72 @@
+/* @media(min-width: 920px) {
+    .lazy {
+        display:flex;
+        
+    }
+
+
+} */
+
+/* @media(max-width: 660px) {
+        input[type="radio"] {
+            
+            vertical-align: middle;
+          }
+        } */
+
+
+
+
+
+body {
+    background-color:lightseagreen;
+    width: 490px;
+    margin:auto;
+    margin-top: 70px;
+    padding: 40px;
+    
+}
+h1 {
+    text-align: center;
+    border: solid 2px black;
+}
+
+.counters {
+    padding-left: 85%;;
+
+}
+.counter {
+    padding-left: 45px;
+}
+
+.errors {
+    color:red;
+}
+
+.english{
+    margin: 2%;
+    
+   
+   } 
+   .xhosa{
+       margin: 2%;
+       
+   }
+   .sotho{
+       margin: 2%;
+       
+    } 
+    .head{
+        background-color: salmon;
+    }
+    .row1{
+        
+        background-color: lightgreen;
+        width: 600px;
+        margin: auto;
+        border: 5px black solid;
+        
+        padding: 40px;
+    
+        
+    }
