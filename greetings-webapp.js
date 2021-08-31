@@ -21,23 +21,27 @@ module.exports = function greet() {
         }
     }
 
-    function greetpeople(language, name) {
-         var upperCaseName = name.substring(0, 1).toUpperCase() + name.slice(1).toLowerCase()
+    function greetpeople(language,name) {
+        // var upperCaseName = names.substring(0, 1).toUpperCase() + names.slice(1).toLowerCase();
         // if (reg.test(upperCaseName)) {
         if (language == "English") {
 
-            return "Hello, " + upperCaseName;
+            return "Hello , " + name[0].toUpperCase() + name.slice(1).toLowerCase() + "!" ;
         }
 
         else if (language == "Isixhosa") {
 
-            return "Molo, " + upperCaseName;
+            return "Molo , " + name[0].toUpperCase() + name.slice(1).toLowerCase() + "!";
         }
         else if (language == "Sesotho") {
 
-            return "Dumela, " + upperCaseName;
+            return "Dumela , " + name[0].toUpperCase() + name.slice(1).toLowerCase() + "!";
         }
 
+    }
+
+    function getGreet(){
+        return greet;
     }
 
     function counterPeople() {

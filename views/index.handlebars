@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +25,7 @@
               
 
                 <label class="">
-                    <span class="errors"></span>
+                    <span class="errors">{{messages.errors}}</span>
                 </label>
 
                 <div class="counters">
@@ -57,7 +62,10 @@
                     <button class="button-primary greetmebtn" type="submit" name="button">Greet me</button>
                     <button class="resetbtn" type="submit" name="button">Reset</button><br>
                     <br>
+                
                 </form>
+
+
                 <div class="">
                     <span class="mes">{{message}}</span>
                 </div><br>
@@ -66,6 +74,10 @@
             
 
         </div>
+        <div>
+        <a href="/actions">GREETED USERS</a>
+       </div>
+       <td><span class="users">{{greetedUser}}</span></td>
     </div>
 
 
