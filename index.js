@@ -6,7 +6,7 @@ const greet = require("./greetings-webapp");
 
 const flash = require('express-flash');
 const session = require('express-session')
-const greetApp = greet();
+
 app.use(session({
     secret:"string save",
     resave: false,
@@ -28,15 +28,44 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(flash())
 
-app.get("/", function (req, res) {
+
+const pg = require("pg");
+const Pool = pg.Pool;
+
+
+let useSSL = false;
+let local = process.env.LOCAL || false;
+if (process.env.DATABASE_URL && !local){
+    useSSL = true;
+}
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/greeting_app';
+
+const pool = new Pool({
+    connectionString,
+    ssl : useSSL
+  });
+const greetApp = greet(pool);
+
+
+
+//   const query = pool.query('select * from namelist')
+//   query.then(function(namelist){
+//    console.log(namelist.rows)
+//   });
+
+
+
+
+app.get("/", async function (req, res) {
     //console.log(req.params.id);
     res.render('index', {
         greeting: greetApp.greetpeople(),
-        count: greetApp.counterPeople(),
+        count: await greetApp.counterPeople(),
     });
 });
 
-app.post('/greeting', function (req, res) {
+app.post('/greeting', async function (req, res) {
     // console.log(req.body)
         var message = "";
         var count = "";
@@ -46,7 +75,7 @@ app.post('/greeting', function (req, res) {
        if(name && language){
        greetApp.storeNames(name)
        message = greetApp.greetpeople(language,name);
-       count = greetApp.counterPeople();
+       count = await greetApp.counterPeople();
        greetedUser =greetApp.nameGreeted();
      console.log({message})
      console.log({count})
@@ -101,7 +130,7 @@ app.get('/greeted/:names', function (req, res) {
 
 
 
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3013;
 
 app.listen(PORT, function () {
     console.log('App started on port:', PORT);
