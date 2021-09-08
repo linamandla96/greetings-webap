@@ -39,8 +39,17 @@ h1 {
     padding-left: 45px;
 }
 
+@keyframes erroMesseges{
+    to{
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
 .errors {
     color:red;
+    animation: erroMesseges 0s ease-in 3s forwards;
 }
 
 .english{

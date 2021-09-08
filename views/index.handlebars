@@ -25,7 +25,9 @@
               
 
                 <label class="">
-                    <span class="errors">{{messages.errors}}</span>
+                    {{#if messages.errors}}
+                    <div class="errors">{{messages.errors}}</div>
+                   {{/if}}
                 </label>
 
                 <div class="counters">
