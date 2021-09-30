@@ -39,11 +39,13 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/greeting_app';
 
 const pool = new Pool({
-    connectionString,
-    ssl: useSSL
+    connectionString: process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/greeting_app',
+    ssl: {
+        useSSL,
+    rejectUnauthorized: false
+    }
 });
 const greetApp = greet(pool);
 
@@ -71,14 +73,14 @@ app.post('/greeting', async function (req, res) {
 
 
     var message = "";
-    
+
     if (thename && language) {
         await greetApp.storeNames(thename)
 
         var message = await greetApp.greetpeople(language, thename);
         var myCount = await greetApp.counting(thename);
         var greetedUser = await greetApp.nameGreeted();
-        
+
 
         console.log({ message })
         console.log({ myCount })
@@ -122,7 +124,7 @@ app.get('/actions', async function (req, res) {
 
 app.get('/greeted/:names', async function (req, res) {
     var greetedUsers = req.params.names;
-    
+
     var countUsers = await greetApp.counterPeople(greetedUsers)
     console.log(countUsers)
     res.render('greeted', { name: greetedUsers, counter: countUsers });
