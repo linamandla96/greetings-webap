@@ -46,11 +46,22 @@ h1 {
         overflow: hidden;
     }
 }
-
 .errors {
     color:red;
     animation: erroMesseges 0s ease-in 3s forwards;
 }
+.greetedNames a:link, .buttonsGreeted a:link{
+    text-decoration: none;
+}
+.greetedNames{
+    display: flex;
+}
+.buttonsGreeted{
+    display: flex;
+}
+.listBtn {
+    text-decoration: none;
+} 
 
 .english{
     margin: 2%;

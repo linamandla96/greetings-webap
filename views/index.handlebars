@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,64 +17,71 @@
             <h1>GREETING APP</h1>
 
 
-              
 
+
+            <label class="">
+                {{#if messages.errors}}
+                <div class="errors">{{messages.errors}}</div>
+                {{/if}}
+            </label>
+
+            <div class="counters">
+                <h3>COUNTER</h3>
                 <label class="">
-                    {{#if messages.errors}}
-                    <div class="errors">{{messages.errors}}</div>
-                   {{/if}}
+                    <span class="counter" name="count">{{count}}</span>
                 </label>
+            </div>
+            <form action="/greeting" method="POST">
+                <label for="">Name</label>
+                <input type="text" name="names" class="nameEntered" value="{{names}}" placeholder="enter name"><br>
+                <br>
 
-                <div class="counters">
-                    <h3>COUNTER</h3>
-                    <label class="">
-                        <span class="counter" name="count">{{count}}</span>
+                <div class="lazy">
+                    <label class="english">
+                        <input type="radio" name="languages" class="languageSelect" value="English">
+                        <span class="label-body">ENGLISH</span>
                     </label>
-                </div>
-                <form action="/greeting" method="POST">
-                    <label for="">Name</label>
-                    <input type="text" name="names" class="nameEntered" value="{{names}}"
-                        placeholder="enter name"><br>
-                    <br>
-                   
-                        <div class="lazy">
-                            <label class="english">
-                                <input type="radio" name="languages" class="languageSelect" value="English">
-                                <span class="label-body">ENGLISH</span>
-                            </label>
 
-                            <label class="xhosa">
-                                <input type="radio" name="languages" class="languageSelect" value="Isixhosa">
-                                <span class="label-body">ISIXHOSA</span>
-                            </label>
+                    <label class="xhosa">
+                        <input type="radio" name="languages" class="languageSelect" value="Isixhosa">
+                        <span class="label-body">ISIXHOSA</span>
+                    </label>
 
-                            <label class="sotho">
-                                <input type="radio" name="languages" class="languageSelect" value="Sesotho">
-                                <span class="label-body">SESOTHO</span>
-                            </label>
+                    <label class="sotho">
+                        <input type="radio" name="languages" class="languageSelect" value="Sesotho">
+                        <span class="label-body">SESOTHO</span>
+                    </label>
 
-                        </div><br>
-                   
-
-                    <button class="button-primary greetmebtn" type="submit" name="button">Greet me</button>
-                    <button class="resetbtn" type="submit" name="button">Reset</button><br>
-                    <br>
-                
-                </form>
-
-
+                </div><br>
                 <div class="">
                     <span class="mes">{{message}}</span>
                 </div><br>
                 <br>
 
-            
+                <button class="button-primary greetmebtn" type="submit" name="button">Greet me</button>
+            </form>
+
+            </form>
+            <br>
+
+
+
+
+
+
+
 
         </div>
-        <div>
-        <a href="/actions">GREETED NAMES</a>
-       </div>
-       <td><span class="users">{{greetedUser}}</span></td>
+        <div class="greetedNames">
+            <button><a href="/actions">GREETED NAMES</a></button>
+            <form action="/reset" method="post">
+                <button class="resetbtn" type="submit" name="button">Reset</button>
+            </form>
+
+
+
+        </div>
+        <td><span class="users">{{greetedUser}}</span></td>
     </div>
 
 

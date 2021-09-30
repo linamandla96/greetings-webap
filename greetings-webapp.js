@@ -1,37 +1,45 @@
-//const { Pool } = require("pg");
+
 
 module.exports = function greet(pool) {
 
 
-    //localStorage.getItem(names);
+
     var nameList = {};
     var reg = /^[a-zA-Z]+$/
 
-     async function storeNames(names) {
+    async function storeNames(name) {
+        // console.log(names)
 
-        try{
-        var upperCaseName = names.substring(0, 1).toUpperCase() + names.slice(1).toLowerCase()
-            if (reg.test(upperCaseName)) {
-                
-                if (nameList[upperCaseName] === undefined ) {
-                    nameList[upperCaseName] = 1;
-                    await pool.query('insert into namelist (name, counter) values($1, $2)', [upperCaseName,1])
-                }
-                else {
-                    nameList[upperCaseName]++;
-                }
+        let names = name[0].toUpperCase() + name.slice(1).toLowerCase()
+        try {
+
+
+            let countname = await pool.query(`SELECT name from namelist WHERE name = $1`, [names]);
+            if (countname.rowCount < 1) {
+
+                await pool.query('insert into namelist (name, counterUsers) values($1, $2)', [names, 1])
+
+
+
+
+            } else {
+
+                await pool.query('UPDATE  namelist SET counterUsers = counterUsers + 1  WHERE name = $1', [names])
+
             }
-        } catch(err){
+
+        } catch (err) {
             console.log("error caught this", err)
             throw err;
         }
     }
 
-    function greetpeople(language,name) {
-    
+
+    function greetpeople(language, name) {
+
         if (language == "English") {
 
-            return "Hello , " + name[0].toUpperCase() + name.slice(1).toLowerCase() + "!" ;
+            return "Hello , " + name[0].toUpperCase() + name.slice(1).toLowerCase() + "!";
         }
 
         else if (language == "Isixhosa") {
@@ -44,13 +52,26 @@ module.exports = function greet(pool) {
         }
 
     }
+    async function counting() {
 
-    // function getGreet(){
-    //     return greet;
-    // }
+        let counting = await pool.query('select * from namelist')
+        const countingP = counting.rowCount;
+        return countingP;
+    }
 
-    function counterPeople() {
-        return Object.keys (nameList).length;
+    async function counterPeople(name) {
+        try {
+            var countList = await pool.query('select counterUsers from namelist WHERE name = $1', [name])
+            //return Object.keys (nameList).length;
+            var countedlist = countList.rows[0];
+            var countUserList = countedlist.counterusers;
+            return countUserList;
+
+        }
+        catch (err) {
+            console.log("error caught this", err)
+            throw err;
+        }
     }
 
     function errorMesseges(names) {
@@ -71,9 +92,18 @@ module.exports = function greet(pool) {
         }
     }
 
-    function nameGreeted() {
-        return nameList;
+    async function nameGreeted() {
+
+        var nameList = await pool.query('Select distinct name FROM namelist ')
+
+        return nameList.rows;
+
     }
+    async function resetBtn() {
+        let reset = await pool.query('delete from namelist');
+        return reset;
+    }
+
 
 
     return {
@@ -85,6 +115,8 @@ module.exports = function greet(pool) {
         errorMesseges,
         errors,
         errorMes,
+        counting,
+        resetBtn
 
     }
 

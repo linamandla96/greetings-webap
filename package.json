@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "mocha": "^9.1.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.13"
   },
   "repository": {
     "type": "git",
