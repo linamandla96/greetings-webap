@@ -44,7 +44,7 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/greeting_app',
     ssl: {
         useSSL,
-    rejectUnauthorized: false
+        rejectUnauthorized: false
     }
 });
 const greetApp = greet(pool);
@@ -62,11 +62,7 @@ app.post('/greetedlist', greetApp.route3)
 
 app.get('/greetedname', greetApp.route4)
 
-
-
-
 app.get('/greeted/:names', greetApp.route5)
-
 
 app.post('/reset', greetApp.route6)
 

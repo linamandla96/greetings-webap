@@ -8,7 +8,7 @@ module.exports = function greet(pool) {
     var reg = /^[a-zA-Z]+$/
 
     async function storeNames(name) {
-        // console.log(names)
+
 
         let names = name[0].toUpperCase() + name.slice(1).toLowerCase()
         try {
@@ -62,7 +62,7 @@ module.exports = function greet(pool) {
     async function counterPeople(name) {
         try {
             var countList = await pool.query('select counterusers from namelist WHERE name = $1', [name])
-            
+
             var countedlist = countList.rows[0];
             var countUserList = countedlist.counterusers;
             return countUserList;
