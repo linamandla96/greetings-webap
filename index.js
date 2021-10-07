@@ -82,9 +82,7 @@ app.post('/greeting', async function (req, res) {
         var greetedUser = await greetApp.nameGreeted();
 
 
-        console.log({ message })
-        console.log({ myCount })
-        console.log({ greetedUser });
+      
 
     }
     else if (!thename && language) {
@@ -104,16 +102,16 @@ app.post('/greeting', async function (req, res) {
 
 });
 
-app.post('/actions', function (req, res) {
+app.post('/greetedlist', function (req, res) {
     var greetedUser = greetApp.nameGreeted();
 
-    res.render('actions', {
+    res.render('greetedname', {
         greetedUser,
     })
 });
 
-app.get('/actions', async function (req, res) {
-    res.render('actions', {
+app.get('/greetedname', async function (req, res) {
+    res.render('greetedname', {
         actions: await greetApp.nameGreeted()
     });
 

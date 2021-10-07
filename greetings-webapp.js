@@ -61,8 +61,8 @@ module.exports = function greet(pool) {
 
     async function counterPeople(name) {
         try {
-            var countList = await pool.query('select counterUsers from namelist WHERE name = $1', [name])
-            //return Object.keys (nameList).length;
+            var countList = await pool.query('select counterusers from namelist WHERE name = $1', [name])
+            
             var countedlist = countList.rows[0];
             var countUserList = countedlist.counterusers;
             return countUserList;
