@@ -2,7 +2,7 @@ let express = require('express');
 let app = express();
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const greet = require("./greetings-webapp");
+const greet = require("./route");
 
 const flash = require('express-flash');
 const session = require('express-session')
@@ -54,88 +54,21 @@ const greetApp = greet(pool);
 
 
 
-app.get('/', async function (req, res) {
-    let greet = greetApp.greetpeople()
-    let counti = await greetApp.counting()
+app.get('/', greetApp.route1);
 
-    res.render('index', {
-        greeting: greet,
-        count: counti
-    });
-});
+app.post('/greeting', greetApp.route2)
 
-app.post('/greeting', async function (req, res) {
+app.post('/greetedlist', greetApp.route3)
 
-
-    const thename = req.body.names;
-    const language = req.body.languages
-    var myCount = await greetApp.counting(thename);
-
-
-    var message = "";
-
-    if (thename && language) {
-        await greetApp.storeNames(thename)
-
-        var message = await greetApp.greetpeople(language, thename);
-        var myCount = await greetApp.counting(thename);
-        var greetedUser = await greetApp.nameGreeted();
-
-
-      
-
-    }
-    else if (!thename && language) {
-        req.flash('errors', 'Please enter your name!')
-    }
-    else if (thename && !language) {
-        req.flash('errors', 'Please select a language!')
-    }
-    else if (!thename && !language) {
-        req.flash('errors', 'Please enter your name and select a language!')
-    }
-
-    res.render('index', {
-        message,
-        count: myCount
-    })
-
-});
-
-app.post('/greetedlist', function (req, res) {
-    var greetedUser = greetApp.nameGreeted();
-
-    res.render('greetedname', {
-        greetedUser,
-    })
-});
-
-app.get('/greetedname', async function (req, res) {
-    res.render('greetedname', {
-        actions: await greetApp.nameGreeted()
-    });
-
-});
+app.get('/greetedname', greetApp.route4)
 
 
 
 
-app.get('/greeted/:names', async function (req, res) {
-    var greetedUsers = req.params.names;
-
-    var countUsers = await greetApp.counterPeople(greetedUsers)
-    console.log(countUsers)
-    res.render('greeted', { name: greetedUsers, counter: countUsers });
+app.get('/greeted/:names', greetApp.route5)
 
 
-});
-
-
-app.post('/reset', async function (req, res) {
-    await greetApp.resetBtn()
-
-    res.redirect('/')
-});
+app.post('/reset', greetApp.route6)
 
 
 let PORT = process.env.PORT || 3013;
